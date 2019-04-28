@@ -206,7 +206,6 @@ public class Schedule {
                         || (lessonA.getTimeId() == lessonB.getTimeId() && lessonA.getGroupId() == lessonB.getGroupId()))
                         && lessonA.getLessonId() != lessonB.getLessonId()) {
                     clashes++;
-                    break;
                 }
             }
 
