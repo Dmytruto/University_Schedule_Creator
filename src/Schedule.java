@@ -190,28 +190,26 @@ public class Schedule {
                 clashes++;
             }
 
+            if(lessonA.getSubjectId() == 4){
+                for (Lesson lessonB : this.lessons) {
+                    if(lessonA.getGroupId() == lessonB.getGroupId() && this.getTime(lessonA.getTimeId()).getDay() == this.getTime(lessonB.getTimeId()).getDay()
+                            &&  this.getTime(lessonA.getTimeId()).getLessonStartHour() < this.getTime(lessonB.getTimeId()).getLessonStartHour()){
+                        clashes++;
+                        break;
+                    }
+                }
+            }
+
             for (Lesson lessonB : this.lessons) {
-                if (lessonA.getAudienceId() == lessonB.getAudienceId() && lessonA.getTimeId() == lessonB.getTimeId()
+                if (((lessonA.getAudienceId() == lessonB.getAudienceId() && lessonA.getTimeId() == lessonB.getTimeId())
+                        || (lessonA.getTeacherId() == lessonB.getTeacherId() && lessonA.getTimeId() == lessonB.getTimeId())
+                        || (lessonA.getTimeId() == lessonB.getTimeId() && lessonA.getGroupId() == lessonB.getGroupId()))
                         && lessonA.getLessonId() != lessonB.getLessonId()) {
                     clashes++;
                     break;
                 }
             }
 
-            for (Lesson lessonB : this.lessons) {
-                if (lessonA.getTeacherId() == lessonB.getTeacherId() && lessonA.getTimeId() == lessonB.getTimeId()
-                        && lessonA.getLessonId() != lessonB.getLessonId()) {
-                    clashes++;
-                    break;
-                }
-            }
-
-            for (Lesson lessonB : this.lessons) {
-                if(lessonA.getTimeId() == lessonB.getTimeId() && lessonA.getGroupId() == lessonB.getGroupId() && lessonA.getLessonId() != lessonB.getLessonId()){
-                    clashes++;
-                    break;
-                }
-            }
         }
 
         return clashes;

@@ -16,14 +16,10 @@ public class GeneticAlgorithm {
         this.tournamentSize = tournamentSize;
     }
 
-
     public Population initPopulation(Schedule schedule) {
         Population population = new Population(this.populationSize, schedule);
         return population;
     }
-
-
-
 
     public double calcFitness(Individual individual, Schedule schedule) {
         Schedule threadSchedule = new Schedule(schedule);
@@ -33,7 +29,6 @@ public class GeneticAlgorithm {
         individual.setFitness(fitness);
         return fitness;
     }
-
 
     public void evalPopulation(Population population, Schedule schedule) {
         double populationFitness = 0;

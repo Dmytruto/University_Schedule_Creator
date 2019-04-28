@@ -13,7 +13,7 @@ public class Main {
         int generation = 0;
 
         while (generation < 1000 && population.getFittest(0).getFitness() != 1.0 ) {
-            System.out.println("G" + generation + " Best fitness: " + population.getFittest(0).getFitness());
+            System.out.println("G" + generation + " Найкраща пристосованість: " + population.getFittest(0).getFitness());
             population = ga.crossoverPopulation(population);
             population = ga.mutatePopulation(population, schedule);
             ga.evalPopulation(population, schedule);
@@ -21,9 +21,9 @@ public class Main {
         }
         schedule.createLessons(population.getFittest(0));
         System.out.println();
-        System.out.println("Solution found in " + generation + " generations");
-        System.out.println("Final solution fitness: " + population.getFittest(0).getFitness());
-        System.out.println("Clashes: " + schedule.calcClashes());
+        System.out.println("Рішення було знайдене за таку кількість поколінь " + generation);
+        System.out.println("Пристосованість рішення: " + population.getFittest(0).getFitness());
+        System.out.println("Не зістиковок в поточному розкладі: " + schedule.calcClashes());
         System.out.println();
         ArrayList<Lesson> lessons = new ArrayList<>(Arrays.asList(schedule.getLessons()));
         int previousGroup = -1;
@@ -36,16 +36,16 @@ public class Main {
         for (Lesson bestClass : sortedLessons) {
             if(schedule.getGroup(bestClass.getGroupId()).getGroupId() != previousGroup ){
                 System.out.println("++++++++++++++++++++++");
-                System.out.println("Group: " + schedule.getGroup(bestClass.getGroupId()).getGroupId());
+                System.out.println("Група: " + schedule.getGroup(bestClass.getGroupId()).getGroupId());
                 previousGroup = schedule.getGroup(bestClass.getGroupId()).getGroupId();
             }
-            System.out.println("Subject: " +
+            System.out.println("Предмет: " +
                     schedule.getSubject(bestClass.getSubjectId()).getSubjectName());
-            System.out.println("Audience: " +
+            System.out.println("Аудиторія: " +
                     schedule.getAudience(bestClass.getAudienceId()).getAudienceNumber());
-            System.out.println("Teacher: " +
+            System.out.println("Викладач: " +
                     schedule.getTeacher(bestClass.getTeacherId()).getTeacherName());
-            System.out.println("Time: " +
+            System.out.println("Час: " +
                     schedule.getTime(bestClass.getTimeId()).getTime());
             System.out.println("-----");
         }
